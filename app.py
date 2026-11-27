@@ -295,7 +295,7 @@ if scan_button:
                     "EMA20": round(last["EMA20"], 2),
                     "EMA50": round(last["EMA50"], 2),
                     "15m Supertrend": last["15m ST"],
-                    "Age (sessions)": int((pd.Timestamp(daily.index[-1]).date() - pd.Timestamp(last["Date"])).days)
+                    "Age (sessions)": int((pd.DatetimeIndex(daily.index).normalize() > pd.Timestamp(last["Date"]).normalize()).sum())
                 })
         status.empty()
         progress.empty()
